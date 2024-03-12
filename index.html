@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xml:lang="en">
+
+<head>
+  <title></title>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+  <script src="https://www-dev.gd-azure-dev.net/hpp/geideaCheckout.min.js" rel="preload"></script>
+  <script src="https://unpkg.com/detect-autofill/dist/detect-autofill.js"></script>
+</head>
+
+<body>
+  <div id='main-container'>
+    <input type="text" id="sessionIdInput" placeholder="Enter Session ID">
+    <button onclick="startPayment()">Start Payment</button>
+  </div>
+  <script>
+    function startPayment() {
+      try {
+        const sessionId = document.getElementById("sessionIdInput").value;
+
+        var onSuccess = function(data) {
+          console.log(JSON.stringify(data));
+          alert(JSON.stringify(data));
+        }
+        var onError = function(data) {
+          alert(JSON.stringify(data));
+        }
+        var onCancel = function(data) {
+          alert(JSON.stringify(data));
+        }
+
+        const api = new GeideaCheckout(onSuccess, onError, onCancel);
+
+        api.startPayment(sessionId);
+      } catch (err) {
+        alert(err);
+      }
+    }
+  </script>
+</body>
+
+</html>
